@@ -360,7 +360,7 @@ export function LogicStudio() {
             ))}
           </ol>
           <Callout tone="plain">
-            同级从左到右结合。例如 <code>A ^ B &amp; C</code> 等价于 <code>A ⊕ (B·C)</code>。
+            同为同级时从左到右结合。例如 <code>A ⊕ B·C</code> 等价于 <code>A ⊕ (B·C)</code> —— 与比异或先算。
           </Callout>
         </Panel>
 

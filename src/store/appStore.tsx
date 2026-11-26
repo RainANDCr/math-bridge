@@ -457,7 +457,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       expressionDraft: DEFAULT_EXPRESSION,
       probabilities: initialProbabilities(fn),
       manual: emptyManual(),
-      toast: { id: (toastSeq += 1), kind: "ok", text: "已恢复默认实验 F = (A & B) | C" },
+      toast: { id: (toastSeq += 1), kind: "ok", text: `已恢复默认实验 ${DEFAULT_EXPRESSION}` },
     }));
   }, []);
 

@@ -75,7 +75,7 @@ export const CONCEPTS: Concept[] = [
       { domain: "数字电路", text: "或门（OR gate）：任一输入为高，输出即为高。" },
       { domain: "概率论", text: "对应事件并集 A ∪ B，且 P(A∪B)=P(A)+P(B)−P(A∩B)。" },
     ],
-    experiment: "输入 F = A | B，观察卡诺图上三个格子连成一个 L 形分组。",
+    experiment: "输入 F = A + B，观察卡诺图上三个格子连成一个 L 形分组。",
     misconceptions: ["把“或”理解成排他或（XOR），从而算错概率。"],
   },
   {
@@ -90,7 +90,7 @@ export const CONCEPTS: Concept[] = [
       { domain: "数字电路", text: "非门（NOT gate / inverter）：输出与输入反相。" },
       { domain: "概率论", text: "对应补集 Aᶜ，且 P(Aᶜ) = 1 − P(A)。" },
     ],
-    experiment: "输入 F = !A，卡诺图会覆盖 A=0 的两格，化简结果为 ¬A。",
+    experiment: "输入 F = A′，卡诺图会覆盖 A=0 的两格，化简结果为 A̅。",
     misconceptions: ["把 ¬(A∧B) 直接写成 ¬A∧¬B：正确结果是 ¬A∨¬B（德摩根律）。"],
   },
   {
@@ -120,7 +120,7 @@ export const CONCEPTS: Concept[] = [
       { domain: "数字电路", text: "逻辑函数化简：用更少的门实现同一功能，降低成本与延迟。" },
       { domain: "概率论", text: "事件集合运算（交、并、补）满足同一套分配律与德摩根律。" },
     ],
-    experiment: "比较 F = (A&B) | (A&!B) 与 F = A 的真值表，验证吸收律。",
+    experiment: "比较 F = A·B + A·B′ 与 F = A 的真值表，验证吸收律。",
     misconceptions: ["把普通代数的 A + A = 2A 搬过来：布尔代数里 A + A = A。"],
   },
   {

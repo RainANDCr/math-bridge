@@ -2,6 +2,10 @@
 
 **KARNAUGH MAP STUDIO｜卡诺图工作室**
 
+[![Deploy to GitHub Pages](https://github.com/RainANDCr/math-bridge/actions/workflows/deploy.yml/badge.svg)](https://github.com/RainANDCr/math-bridge/actions/workflows/deploy.yml)
+
+**在线访问：<https://rainandcr.github.io/math-bridge/>** —— 纯静态站点，没有后端，全部计算在你的浏览器里完成。
+
 一个完全本地运行的交互式实验平台，把离散数学里的命题逻辑、数字电路里的卡诺图化简、概率论里的事件与随机实验，接到**同一个布尔函数对象**上。
 
 输入一个表达式，你会同时得到：真值表、门级电路、卡诺图、最简与或式、以及在这个函数上的概率实验。改动其中任何一处，其余视图立刻同步 —— 因为它们本来就是同一件事的不同写法。
@@ -300,7 +304,7 @@ src/
     appStore.tsx             # Context + 全部 action
     persistence.ts           # localStorage 读写、导入校验
   styles/                    # tokens / base / components / layout / studio
-  tests/                     # 18 组测试：boolean / karnaugh / probability / joint / multiOutput / sequential / reduction / race / timing / hazards / division / factoring / netlist / sequentialCircuit / concepts / palette / notation / persistence
+  tests/                     # 19 组测试：boolean / karnaugh / probability / joint / multiOutput / sequential / reduction / race / timing / hazards / division / factoring / netlist / sequentialCircuit / concepts / palette / copy / notation / persistence
 ```
 
 ---
@@ -656,7 +660,7 @@ JK 触发的机先按次态值折算成 D 再接入，行为与原状态机逐�
 npm test
 ```
 
-295 个用例，覆盖：
+298 个用例，覆盖：
 
 - 词法分析（多写法等价、中文括号、非法字符位置）
 - 语法分析（优先级、结合性、括号、缺操作数、未闭合、多余内容）
@@ -695,6 +699,8 @@ npm test
 - 同或 / 与非 / 或非在不同学科下的字形（`A ⊙ B`、`(A·B)′`、`(A ∩ B)ᶜ`、`P((A △ B)ᶜ)`）
 - 符号注册表：8 个条目、每条的语境说明非空、缓冲器在集合与概率下明确为「无直接对应」
 - 搜索：`AND` / `与` / `∧` / `·` / `交集` / `对称差` / `上划线` 都能定位到对应运算
+- **文案与记法一致**：首页示例与概念卡正文里不得出现 `& | ! ^`（`P(B|A)` 这类条件概率先剥掉），
+  示例必须能解析、有取反必须写成后缀 `′`
 - **输入区按钮**：六个记法下按钮插入的字符都能被解析（点一下不会把式子变成语法错误）、
   三种二元运算的真值向量确实不同、选区取反整体加括号、提示里的样例本身可解析、
   「撇号显示成上划线」这句说明只在渲染器真的画上划线的记法下出现（布尔/集合/概率下必须为空）

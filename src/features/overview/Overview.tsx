@@ -16,14 +16,9 @@ import { parseExperimentJson } from "../../store/persistence";
 import { ROUTES } from "../../app/routes";
 import { minimizeValues } from "../../core/karnaugh/minimizer";
 import { mintermList, mintermNotation } from "../../core/boolean/model";
+import { EXAMPLES } from "./examples";
 
-const EXAMPLES = [
-  { expr: "F = A·B", goal: "最小的“与”：只有在 A、B 同时为 1 的那一行，输出才为 1。" },
-  { expr: "F = A + B", goal: "“或”覆盖三个最小项，卡诺图上会合并成一个 2 格 + 1 格的分组。" },
-  { expr: "F = A·B + C", goal: "化简的典型：4 项的 C 加 1 个补丁 A·B，就从 5 个最小项压到 2 项。" },
-  { expr: "F = A·B′ + A′·B", goal: "这是异或：两项都无法再合并，说明它已经是“本质复杂”的。" },
-  { expr: "F = (A & B) | (A & !B)", goal: "看起来有两项，其实等于 A —— 吸收律的直观证据。" },
-];
+
 
 function MiniBridge() {
   const rows = [
@@ -339,7 +334,7 @@ export function Overview() {
 
         <Panel title="建议的第一次实验">
           <ol className="stack" style={{ gap: 8 }}>
-            <li className="small muted">1. 在卡诺图工作室输入 F = (A &amp; B) | C，看自动分组。</li>
+            <li className="small muted">1. 在卡诺图工作室输入 F = A·B + C，看自动分组。</li>
             <li className="small muted">2. 切到手动分组，自己圈出 C 的四个格子。</li>
             <li className="small muted">3. 把 m6 改成 0，观察 C + A·B 如何退化成 C。</li>
             <li className="small muted">4. 去概率实验室，把 P(C) 调到 0，看输出概率。</li>
