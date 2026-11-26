@@ -1,0 +1,58 @@
+name: Deploy to GitHub Pages
+
+# 只在 main 分支上发布：任何 push 到 main 都重新构建并覆盖线上版本，
+# 也可以在 Actions 页面手动触发（workflow_dispatch）。
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Pages 需要这三项：写入 Pages、用 OIDC 令牌、读源码
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 同一时刻只跑一个部署；新的 push 直接取消排队中的旧任务，
+# 避免「先点火的旧提交后上线」把新版本盖回去。
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: 安装依赖
+        run: npm ci
+
+      # 测试放在构建之前：数学算错了就不该发布。
+      # 295 个用例约 2 秒，这个代价换「线上不会是坏版本」是划算的。
+      - name: 单元测试
+        run: npm test
+
+      - name: 构建静态站点
+        run: npm run build
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

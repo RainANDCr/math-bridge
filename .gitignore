@@ -1,0 +1,10 @@
+node_modules
+dist
+.DS_Store
+*.local
+vite.config.ts.timestamp-*
+
+# 本地工作记录与临时 QA 脚本：不属于要公开的源码
+.workbuddy/
+.qa/
+_*.mjs
